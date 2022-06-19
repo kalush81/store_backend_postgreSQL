@@ -1,2 +1,2 @@
-# nodejs-project-start-template
-basic configs for node/typescript projects and tests with jasmine library
+# nodejs project. Server for a store, postgreSQL , express, typescript
+...in development
