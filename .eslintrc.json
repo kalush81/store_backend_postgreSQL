@@ -1,26 +1,23 @@
 {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "prettier"
-    ],
-    "rules": {
-      // "prettier/prettier": "error",
-      "no-use-before-define": ["error", { "functions": true, "classes": true }],
-      "no-var": "error",
-      "prefer-const": "error",
-      "no-console": ["error", { "allow": ["warn", "error", "log"] }] 
-    },
-    "parserOptions": {
-      "ecmaVersion": 2017
-    },
-    "env": {
-      "node": true,
-      "es6": true
-    }
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+   "@typescript-eslint/no-namespace": "off",
+    "no-console": ["error", { "allow": ["warn", "error", "log"] }],
+    "@typescript-eslint/no-var-requires" : "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2015
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  }
 }    
