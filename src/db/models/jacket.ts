@@ -39,4 +39,14 @@ export class JacketStore {
       throw new Error(`could not upload new jacket, ${error}`);
     }
   }
+
+  async delete(id: string): Promise<void> {
+    try {
+      const conn = await pool.connect();
+      const sql = "DELETE FROM products WHERE id=($1)";
+      const result = await conn.query(sql, [id]);
+    } catch (error) {
+      throw new Error(`could not rmeove jacket, ${error}`);
+    }
+  }
 }
