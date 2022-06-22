@@ -1,14 +1,15 @@
-import { Pool, QueryResult } from "pg";
+import { Pool } from "pg";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const { user, host, database, password, port } = process.env;
+const { user, host, database, database_test, password, port, ENV } =
+  process.env;
 
-const pool = new Pool({
+const pool: Pool = new Pool({
   user,
   host,
-  database,
+  database: ENV === "test" ? database_test : database,
   password,
   port: Number(port),
 });

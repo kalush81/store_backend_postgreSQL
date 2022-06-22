@@ -10,7 +10,7 @@
     "driver": "pg",
     "host": "localhost",
     "database": "clothes_test",
-    "user": "test_kris",
+    "user": "kris",
     "password": "password"
   }
 }

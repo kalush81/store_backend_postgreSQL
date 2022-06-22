@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "jasmine": "jasmine",
-    "test": "npm run build && npm run jasmine",
+    "test": "ENV=test && npm run build && db-migrate --env test up && npm run jasmine && db-migrate db:drop test",
     "prettier": "prettier --config .prettierrc.json './**/*.ts' --write",
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "build": "npx tsc",

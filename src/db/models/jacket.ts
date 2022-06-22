@@ -14,10 +14,21 @@ export class JacketStore {
       const conn = await pool.connect();
       const sql = "SELECT * FROM jacket";
       const result = await conn.query(sql);
-      conn.release();
+      conn?.release();
       return result.rows;
     } catch (error) {
       throw new Error(`can not get jackets, ${error}`);
+    }
+  }
+
+  async getOnById(id: string): Promise<Jacket> {
+    try {
+      const conn = await pool.connect();
+      const sql = "SELECT * FROM jackets WHERE id=($1)";
+      const result = await conn.query(sql, [id]);
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`could not get that jacket, ${error}`);
     }
   }
 
@@ -40,11 +51,13 @@ export class JacketStore {
     }
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: string): Promise<Jacket> {
     try {
       const conn = await pool.connect();
       const sql = "DELETE FROM products WHERE id=($1)";
       const result = await conn.query(sql, [id]);
+      conn.release();
+      return result.rows[0];
     } catch (error) {
       throw new Error(`could not rmeove jacket, ${error}`);
     }

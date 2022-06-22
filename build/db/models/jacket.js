@@ -19,13 +19,60 @@ class JacketStore {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const conn = yield index_1.default.connect();
-                const sql = 'SELECT * FROM jacket';
+                const sql = "SELECT * FROM jacket";
                 const result = yield conn.query(sql);
-                conn.release();
+                conn === null || conn === void 0 ? void 0 : conn.release();
                 return result.rows;
             }
             catch (error) {
                 throw new Error(`can not get jackets, ${error}`);
+            }
+        });
+    }
+    getOnById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const conn = yield index_1.default.connect();
+                const sql = "SELECT * FROM jackets WHERE id=($1)";
+                const result = yield conn.query(sql, [id]);
+                return result.rows[0];
+            }
+            catch (error) {
+                throw new Error(`could not get that jacket, ${error}`);
+            }
+        });
+    }
+    create(j) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const conn = yield index_1.default.connect();
+                const sql = "INSERT INTO jacket (name, description, quantity, price) VALUES($1, $2, $3, $4) RETURNING *";
+                const result = yield conn.query(sql, [
+                    j.name,
+                    j.description,
+                    j.quantity,
+                    j.price,
+                ]);
+                const jacket = result.rows[0];
+                conn.release();
+                return jacket;
+            }
+            catch (error) {
+                throw new Error(`could not upload new jacket, ${error}`);
+            }
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const conn = yield index_1.default.connect();
+                const sql = "DELETE FROM products WHERE id=($1)";
+                const result = yield conn.query(sql, [id]);
+                conn.release();
+                return result.rows[0];
+            }
+            catch (error) {
+                throw new Error(`could not rmeove jacket, ${error}`);
             }
         });
     }

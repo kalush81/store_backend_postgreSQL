@@ -8,14 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const db_1 = __importDefault(require("./db"));
-const fun = () => __awaiter(void 0, void 0, void 0, function* () {
-    const res = yield db_1.default.query("SELECT * FROM jackets", []);
-    //res.release()
-    console.log(res.rows[0]);
+const jacket_1 = require("../../db/models/jacket");
+const storeJacket = new jacket_1.JacketStore();
+describe("xxx", () => {
+    it("should work", () => {
+        expect(storeJacket.index).toBeDefined();
+    });
+    it("should return list fo jackets, empty arr ", () => __awaiter(void 0, void 0, void 0, function* () {
+        const jackets = yield storeJacket.index();
+        expect(jackets).toEqual([]);
+    }));
 });
-fun();
