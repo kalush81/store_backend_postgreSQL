@@ -7,6 +7,7 @@ const pg_1 = require("pg");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const { user, host, database, database_test, password, port, ENV } = process.env;
+console.log('ENV', ENV);
 const pool = new pg_1.Pool({
     user,
     host,
