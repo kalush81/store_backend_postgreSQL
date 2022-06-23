@@ -21,7 +21,7 @@ class JacketStore {
                 const conn = yield index_1.default.connect();
                 const sql = "SELECT * FROM jacket";
                 const result = yield conn.query(sql);
-                conn === null || conn === void 0 ? void 0 : conn.release();
+                conn.release();
                 return result.rows;
             }
             catch (error) {
@@ -33,7 +33,7 @@ class JacketStore {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const conn = yield index_1.default.connect();
-                const sql = "SELECT * FROM jackets WHERE id=($1)";
+                const sql = "SELECT * FROM jacket WHERE id=($1)";
                 const result = yield conn.query(sql, [id]);
                 return result.rows[0];
             }
@@ -66,13 +66,14 @@ class JacketStore {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const conn = yield index_1.default.connect();
-                const sql = "DELETE FROM products WHERE id=($1)";
+                const sql = "DELETE FROM jacket WHERE id=($1) RETURNING id";
                 const result = yield conn.query(sql, [id]);
                 conn.release();
-                return result.rows[0];
+                const deleted_id = result.rows[0].id;
+                return deleted_id;
             }
             catch (error) {
-                throw new Error(`could not rmeove jacket, ${error}`);
+                throw new Error(`could not remove jacket, ${error}`);
             }
         });
     }

@@ -34,14 +34,29 @@ describe("jacket model", () => {
             price: 100
         });
     }));
-    // it('index method should return a list of books', async () => {
-    //   const result = await storeJacket.index();
-    //   expect(result).toEqual([{
-    //     id: "1",
-    //     title: 'Bridge to Terabithia',
-    //     totalPages: 250,
-    //     author: 'Katherine Paterson',
-    //     summary: 'Childrens'
-    //   }]);
-    // });
+    it('index method should return a list of books', () => __awaiter(void 0, void 0, void 0, function* () {
+        const result = yield storeJacket.index();
+        expect(result).toEqual([{
+                id: 1,
+                name: 'burton snb jacket',
+                description: 'nice winter jacket',
+                quantity: 1,
+                price: 100
+            }]);
+    }));
+    it('show method should return the correct book', () => __awaiter(void 0, void 0, void 0, function* () {
+        const result = yield storeJacket.getOnById("1");
+        expect(result).toEqual({
+            id: 1,
+            name: 'burton snb jacket',
+            description: 'nice winter jacket',
+            quantity: 1,
+            price: 100
+        });
+    }));
+    it('delete method should remove the book', () => __awaiter(void 0, void 0, void 0, function* () {
+        yield storeJacket.delete("1");
+        const result = yield storeJacket.index();
+        expect(result).toEqual([]);
+    }));
 });

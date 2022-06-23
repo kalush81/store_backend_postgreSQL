@@ -14,7 +14,7 @@ export class JacketStore {
       const conn = await pool.connect();
       const sql = "SELECT * FROM jacket";
       const result = await conn.query(sql);
-      conn?.release();
+      conn.release();
       return result.rows;
     } catch (error) {
       throw new Error(`can not get jackets, ${error}`);
@@ -24,7 +24,7 @@ export class JacketStore {
   async getOnById(id: string): Promise<Jacket> {
     try {
       const conn = await pool.connect();
-      const sql = "SELECT * FROM jackets WHERE id=($1)";
+      const sql = "SELECT * FROM jacket WHERE id=($1)";
       const result = await conn.query(sql, [id]);
       return result.rows[0];
     } catch (error) {
@@ -51,15 +51,16 @@ export class JacketStore {
     }
   }
 
-  async delete(id: string): Promise<Jacket> {
+  async delete(id: string): Promise<number> {
     try {
       const conn = await pool.connect();
-      const sql = "DELETE FROM products WHERE id=($1)";
+      const sql = "DELETE FROM jacket WHERE id=($1) RETURNING id";
       const result = await conn.query(sql, [id]);
       conn.release();
-      return result.rows[0];
+      const deleted_id:number = result.rows[0].id
+      return deleted_id
     } catch (error) {
-      throw new Error(`could not rmeove jacket, ${error}`);
+      throw new Error(`could not remove jacket, ${error}`);
     }
   }
 }
