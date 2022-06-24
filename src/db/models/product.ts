@@ -1,30 +1,31 @@
 import pool from "../index";
 
-export type Jacket = {
+export type Product = {
   id?: number;
   name: string;
   description: string;
   quantity: number;
   price: number;
+  category: string
 };
 
-export class JacketStore {
-  async index(): Promise<Jacket[]> {
+export class ProductStore {
+  async index(): Promise<Product[]> {
     try {
       const conn = await pool.connect();
-      const sql = "SELECT * FROM jacket";
+      const sql = "SELECT * FROM products";
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
     } catch (error) {
-      throw new Error(`can not get jackets, ${error}`);
+      throw new Error(`can not get products, ${error}`);
     }
   }
 
-  async getOnById(id: string): Promise<Jacket> {
+  async getOnById(id: string): Promise<Product> {
     try {
       const conn = await pool.connect();
-      const sql = "SELECT * FROM jacket WHERE id=($1)";
+      const sql = "SELECT * FROM products WHERE id=($1)";
       const result = await conn.query(sql, [id]);
       return result.rows[0];
     } catch (error) {
@@ -32,20 +33,21 @@ export class JacketStore {
     }
   }
 
-  async create(j: Jacket): Promise<Jacket> {
+  async create(p: Product): Promise<Product> {
     try {
       const conn = await pool.connect();
       const sql =
-        "INSERT INTO jacket (name, description, quantity, price) VALUES($1, $2, $3, $4) RETURNING *";
+        "INSERT INTO products (name, description, quantity, price, category) VALUES($1, $2, $3, $4, $5) RETURNING *";
       const result = await conn.query(sql, [
-        j.name,
-        j.description,
-        j.quantity,
-        j.price,
+        p.name,
+        p.description,
+        p.quantity,
+        p.price,
+        p.category
       ]);
-      const jacket = result.rows[0];
+      const product = result.rows[0];
       conn.release();
-      return jacket;
+      return product;
     } catch (error) {
       throw new Error(`could not upload new jacket, ${error}`);
     }
@@ -54,13 +56,13 @@ export class JacketStore {
   async delete(id: string): Promise<number> {
     try {
       const conn = await pool.connect();
-      const sql = "DELETE FROM jacket WHERE id=($1) RETURNING id";
+      const sql = "DELETE FROM products WHERE id=($1) RETURNING id";
       const result = await conn.query(sql, [id]);
       conn.release();
-      const deleted_id:number = result.rows[0].id
-      return deleted_id
+      const deleted_id: number = result.rows[0].id;
+      return deleted_id;
     } catch (error) {
-      throw new Error(`could not remove jacket, ${error}`);
+      throw new Error(`could not remove product, ${error}`);
     }
   }
 }

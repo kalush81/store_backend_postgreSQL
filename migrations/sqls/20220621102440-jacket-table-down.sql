@@ -1,1 +1,1 @@
-DROP TABLE jacket;
+DROP TABLE products;
