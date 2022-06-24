@@ -16,7 +16,7 @@ describe("jacket model", () => {
       description: "nice winter jacket",
       quantity: 1,
       price: 100,
-      category: 'jacket'
+      category: "jacket",
     });
     expect(result).toEqual({
       id: 1,
@@ -24,7 +24,7 @@ describe("jacket model", () => {
       description: "nice winter jacket",
       quantity: 1,
       price: 100,
-      category: 'jacket'
+      category: "jacket",
     });
   });
 
@@ -37,7 +37,7 @@ describe("jacket model", () => {
         description: "nice winter jacket",
         quantity: 1,
         price: 100,
-        category: 'jacket'
+        category: "jacket",
       },
     ]);
   });
@@ -50,7 +50,7 @@ describe("jacket model", () => {
       description: "nice winter jacket",
       quantity: 1,
       price: 100,
-      category: 'jacket'
+      category: "jacket",
     });
   });
 

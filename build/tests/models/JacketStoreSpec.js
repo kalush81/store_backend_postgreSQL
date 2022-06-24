@@ -25,7 +25,7 @@ describe("jacket model", () => {
             description: "nice winter jacket",
             quantity: 1,
             price: 100,
-            category: 'jacket'
+            category: "jacket",
         });
         expect(result).toEqual({
             id: 1,
@@ -33,7 +33,7 @@ describe("jacket model", () => {
             description: "nice winter jacket",
             quantity: 1,
             price: 100,
-            category: 'jacket'
+            category: "jacket",
         });
     }));
     it("index method should return a list of books", () => __awaiter(void 0, void 0, void 0, function* () {
@@ -45,7 +45,7 @@ describe("jacket model", () => {
                 description: "nice winter jacket",
                 quantity: 1,
                 price: 100,
-                category: 'jacket'
+                category: "jacket",
             },
         ]);
     }));
@@ -57,7 +57,7 @@ describe("jacket model", () => {
             description: "nice winter jacket",
             quantity: 1,
             price: 100,
-            category: 'jacket'
+            category: "jacket",
         });
     }));
     it("delete method should remove the book", () => __awaiter(void 0, void 0, void 0, function* () {
