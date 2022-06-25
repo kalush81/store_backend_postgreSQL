@@ -62,11 +62,11 @@ productRouter.put("/products/:id", async (req: Request, res: Response) => {
 
 productRouter.delete("/products/:id", async (req: Request, res: Response) => {
   try {
-    const deleted = await productRouter.delete(req.params.id)
+    const deleted = await productStore.delete(req.params.id)
     res.send({ msg: "this is the DELETE route", deleted });
   } catch (err) {
     res.status(400);
-    res.json(err);
+    res.json(err);  
   }
 });
 

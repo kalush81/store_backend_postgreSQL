@@ -57,10 +57,10 @@ export class ProductStore {
   async delete(id: string): Promise<number> {
     try {
       const conn = await pool.connect();
-      const sql = "DELETE FROM products WHERE id=($1) RETURNING id";
+      const sql = "DELETE FROM products WHERE id = $1 RETURNING id;";
       const result = await conn.query(sql, [id]);
       conn.release();
-      const deleted_id: number = result.rows[0].id;
+      const deleted_id: number = result.rows[0].id as number;
       return deleted_id;
     } catch (error) {
       throw new Error(`could not remove product, ${error}`);
