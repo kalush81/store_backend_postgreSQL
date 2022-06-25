@@ -14,8 +14,8 @@ app.get("/", (_req, res: Response) => {
   res.send("Hello in home page");
 });
 
-app.use((_req, res) => { 
-  res.send({msg: 'unhandled routes'})
-})
+app.use((_req, res) => {
+  res.send({ msg: "unhandled routes" });
+});
 
 app.listen(3000, () => console.log("server is up and running"));

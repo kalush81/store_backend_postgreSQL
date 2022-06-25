@@ -19,7 +19,7 @@ productRouter.get("/products", async (_req: Request, res: Response) => {
   }
 });
 
-productRouter.get("/products/:id", async (req: Request, res: Response) => {
+productRouter.get("/product/:id", async (req: Request, res: Response) => {
   try {
     const product = await productStore.getOnById(req.params.id);
     res.send(
@@ -33,7 +33,7 @@ productRouter.get("/products/:id", async (req: Request, res: Response) => {
   }
 });
 
-productRouter.post("/products", async (req: Request, res: Response) => {
+productRouter.post("/product/create", async (req: Request, res: Response) => {
   const product: Product = {
     ...req.body,
   };
@@ -46,7 +46,7 @@ productRouter.post("/products", async (req: Request, res: Response) => {
   }
 });
 
-productRouter.put("/products/:id", async (req: Request, res: Response) => {
+productRouter.put("/product/:id/edit", async (req: Request, res: Response) => {
   const product: Product = {
     id: req.params.id,
     ...req.body,
@@ -60,16 +60,17 @@ productRouter.put("/products/:id", async (req: Request, res: Response) => {
   }
 });
 
-productRouter.delete("/products/:id", async (req: Request, res: Response) => {
-  try {
-    const deleted = await productStore.delete(req.params.id)
-    res.send({ msg: "this is the DELETE route", deleted });
-  } catch (err) {
-    res.status(400);
-    res.json(err);  
+productRouter.delete(
+  "/product/:id/delete",
+  async (req: Request, res: Response) => {
+    try {
+      const deleted = await productStore.delete(req.params.id);
+      res.send({ msg: "this is the DELETE route", deleted });
+    } catch (err) {
+      res.status(400);
+      res.json(err);
+    }
   }
-});
-
-
+);
 
 export default productRouter;
