@@ -68,7 +68,7 @@ class ProductStore {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const conn = yield index_1.default.connect();
-                const sql = "DELETE FROM products WHERE id=($1) RETURNING id";
+                const sql = "DELETE FROM products WHERE id = $1 RETURNING id;";
                 const result = yield conn.query(sql, [id]);
                 conn.release();
                 const deleted_id = result.rows[0].id;

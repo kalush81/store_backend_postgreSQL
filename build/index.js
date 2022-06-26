@@ -14,4 +14,7 @@ app.use(body_parser_1.default.json());
 app.get("/", (_req, res) => {
     res.send("Hello in home page");
 });
+app.use((_req, res) => {
+    res.send({ msg: "unhandled routes" });
+});
 app.listen(3000, () => console.log("server is up and running"));

@@ -28,7 +28,7 @@ productRouter.get("/products", (_req, res) => __awaiter(void 0, void 0, void 0, 
         });
     }
 }));
-productRouter.get("/products/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+productRouter.get("/product/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const product = yield productStore.getOnById(req.params.id);
         res.send(product
@@ -40,7 +40,7 @@ productRouter.get("/products/:id", (req, res) => __awaiter(void 0, void 0, void 
         res.json(err);
     }
 }));
-productRouter.post("/products", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+productRouter.post("/product/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const product = Object.assign({}, req.body);
     try {
         const newProduct = yield productStore.create(product);
@@ -51,7 +51,7 @@ productRouter.post("/products", (req, res) => __awaiter(void 0, void 0, void 0, 
         res.json(err);
     }
 }));
-productRouter.put("/products/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+productRouter.put("/product/:id/edit", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const product = Object.assign({ id: req.params.id }, req.body);
     try {
         const edited = yield productStore.edit(product);
@@ -62,13 +62,14 @@ productRouter.put("/products/:id", (req, res) => __awaiter(void 0, void 0, void 
         res.json(err);
     }
 }));
-productRouter.delete("/products/:id", (_req, res) => {
+productRouter.delete("/product/:id/delete", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.send("this is the DELETE route");
+        const deleted = yield productStore.delete(req.params.id);
+        res.send({ msg: "this is the DELETE route", deleted });
     }
     catch (err) {
         res.status(400);
         res.json(err);
     }
-});
+}));
 exports.default = productRouter;

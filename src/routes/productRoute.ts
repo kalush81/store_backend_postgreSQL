@@ -1,76 +1,12 @@
-import express, { Router, Request, Response } from "express";
-import { Product, ProductStore } from "../db/models/product";
+import express, { Router } from "express";
+import { getAllProducts, getOneProduct, create, edit, remove } from "../controllers/productController";
 
 const productRouter: Router = express.Router();
 
-const productStore = new ProductStore();
-
-productRouter.get("/products", async (_req: Request, res: Response) => {
-  try {
-    const products = await productStore.index();
-    res.send(
-      products.length ? products : { msg: "no products could be found " }
-    );
-  } catch (err) {
-    res.status(400);
-    res.json({
-      err: `could not send products. Relation products probably doesn't exist`,
-    });
-  }
-});
-
-productRouter.get("/product/:id", async (req: Request, res: Response) => {
-  try {
-    const product = await productStore.getOnById(req.params.id);
-    res.send(
-      product
-        ? product
-        : { msg: `product with id: ${req.params.id} doesn't exist` }
-    );
-  } catch (err) {
-    res.status(400);
-    res.json(err);
-  }
-});
-
-productRouter.post("/product/create", async (req: Request, res: Response) => {
-  const product: Product = {
-    ...req.body,
-  };
-  try {
-    const newProduct = await productStore.create(product);
-    res.send({ msg: "this is the CREATE route", product: newProduct });
-  } catch (err) {
-    res.status(400);
-    res.json(err);
-  }
-});
-
-productRouter.put("/product/:id/edit", async (req: Request, res: Response) => {
-  const product: Product = {
-    id: req.params.id,
-    ...req.body,
-  };
-  try {
-    const edited = await productStore.edit(product);
-    res.send({ msg: `this is the EDIT route`, edited });
-  } catch (err) {
-    res.status(400);
-    res.json(err);
-  }
-});
-
-productRouter.delete(
-  "/product/:id/delete",
-  async (req: Request, res: Response) => {
-    try {
-      const deleted = await productStore.delete(req.params.id);
-      res.send({ msg: "this is the DELETE route", deleted });
-    } catch (err) {
-      res.status(400);
-      res.json(err);
-    }
-  }
-);
+productRouter.get("/products", getAllProducts);
+productRouter.get("/product/:id", getOneProduct);
+productRouter.post("/product/create", create);
+productRouter.put("/product/:id/edit", edit); //the logic is wrong here !
+productRouter.delete("/product/:id/delete", remove);
 
 export default productRouter;

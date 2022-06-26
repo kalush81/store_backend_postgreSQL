@@ -66,7 +66,7 @@ export class ProductStore {
       throw new Error(`could not remove product, ${error}`);
     }
   }
-
+ //fix the logic so only changed values will be edited
   async edit(p: Product): Promise<Product> {
     try {
       const conn = await pool.connect();
