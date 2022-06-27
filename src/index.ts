@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import allRoutes from "./routes";
 
-const app = express();
+export const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());

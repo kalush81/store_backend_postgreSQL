@@ -1,5 +1,11 @@
 import express, { Router } from "express";
-import { getAllProducts, getOneProduct, create, edit, remove } from "../controllers/productController";
+import {
+  getAllProducts,
+  getOneProduct,
+  create,
+  edit,
+  remove,
+} from "../controllers/productController";
 
 const productRouter: Router = express.Router();
 

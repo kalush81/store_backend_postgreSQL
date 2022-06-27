@@ -1,6 +1,6 @@
-import { Request, Response } from 'express'
+import { Request, Response } from "express";
 import { ProductStore, Product } from "../db/models/product";
-const productStore = new ProductStore
+const productStore = new ProductStore();
 
 export const getAllProducts = async (_req: Request, res: Response) => {
   try {
@@ -12,7 +12,7 @@ export const getAllProducts = async (_req: Request, res: Response) => {
     res.status(400);
     res.json(err);
   }
-}
+};
 
 export const getOneProduct = async (req: Request, res: Response) => {
   try {
@@ -26,7 +26,7 @@ export const getOneProduct = async (req: Request, res: Response) => {
     res.status(400);
     res.json(err);
   }
-}
+};
 
 export const create = async (req: Request, res: Response) => {
   const product: Product = {
@@ -39,8 +39,8 @@ export const create = async (req: Request, res: Response) => {
     res.status(400);
     res.json(err);
   }
-}
-// fix the logic 
+};
+// fix the logic
 export const edit = async (req: Request, res: Response) => {
   const product: Product = {
     id: req.params.id,
@@ -53,7 +53,7 @@ export const edit = async (req: Request, res: Response) => {
     res.status(400);
     res.json(err);
   }
-}
+};
 
 export const remove = async (req: Request, res: Response) => {
   try {
@@ -63,4 +63,4 @@ export const remove = async (req: Request, res: Response) => {
     res.status(400);
     res.json(err);
   }
-}
+};
