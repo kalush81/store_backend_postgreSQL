@@ -2,15 +2,15 @@
   "dev": {
     "driver": "pg",
     "host": "localhost",
-    "database": "clothes",
-    "user": "kris",
-    "password": "password"
+    "database": {"ENV": "DATABASE"},
+    "user": {"ENV": "USERNAME"},
+    "password": {"ENV": "PASSWORD"}
   },
   "test": {
     "driver": "pg",
     "host": "localhost",
-    "database": "clothes_test",
-    "user": "kris",
-    "password": "password"
+    "database": {"ENV": "DATABASE_TEST"},
+    "user": {"ENV": "USERNAME"},
+    "password": {"ENV": "PASSWORD"}
   }
 }
