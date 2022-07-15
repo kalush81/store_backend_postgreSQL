@@ -9,8 +9,9 @@ export const getAllProducts = async (_req: Request, res: Response) => {
       products.length ? products : { msg: "no products could be found " }
     );
   } catch (err) {
-    res.status(400);
-    res.json(err);
+    console.log("what is this err?", err)
+    res.status(500);
+    res.json({err: 'Internal server error'});
   }
 };
 
