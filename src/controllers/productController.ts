@@ -10,7 +10,7 @@ export const getAllProducts = async (_req: Request, res: Response) => {
     );
   } catch (err) {
     res.status(500);
-    res.json({ err: "Internal server error", msg: `${err}` }); //whis error is an empty obj?
+    res.json(`${(err as Error).message}`); 
   }
 };
 
@@ -24,7 +24,7 @@ export const getOneProduct = async (req: Request, res: Response) => {
     );
   } catch (err) {
     res.status(500);
-    res.json({ err: "Internal server error", msg: `${err} product not found` });
+    res.json(`${(err as Error).message}`); 
   }
 };
 
@@ -37,7 +37,7 @@ export const create = async (req: Request, res: Response) => {
     res.send({ msg: "this is created product", product: newProduct });
   } catch (err) {
     res.status(500);
-    res.json({ err: "Internal server error", msg: `${err} product not created` });
+    res.json(`${(err as Error).message}`); 
   }
 };
 // fix the logic
@@ -51,7 +51,7 @@ export const edit = async (req: Request, res: Response) => {
     res.send({ msg: `this is edited product`, edited });
   } catch (err) {
     res.status(500);
-    res.json({ err: "Internal server error", msg: `${err} product not edited`} );
+    res.json(`${(err as Error).message}`); 
   }
 };
 
@@ -61,6 +61,6 @@ export const remove = async (req: Request, res: Response) => {
     res.send({ msg: "this is id of deleted product", deleted });
   } catch (err) {
     res.status(400);
-    res.json({ err: "Internal server error", msg: `${err} product not removed`});
+    res.json(`${(err as Error).message}`); 
   }
 };
