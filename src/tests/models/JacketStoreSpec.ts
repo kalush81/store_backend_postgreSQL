@@ -1,8 +1,24 @@
 import { ProductStore } from "../../db/models/product";
+import { exec } from "child_process";
 
 const storeProduct = new ProductStore();
 
 describe("product model", () => {
+  // afterAll(() => {
+  //   console.log('reseting test db')
+  //   exec("db-migrate down -e test -c 2 ", (error, stdout, stderr) => {
+  //     if (error) {
+  //       console.log(`error: ${error.message}`);
+  //       return;
+  //     }
+  //     if (stderr) {
+  //       console.log(`stderr: ${stderr}`);
+  //       return;
+  //     }
+  //     console.log(`stdout: ${stdout}`);
+  //   });
+  // });
+
   it("should have an index method", () => {
     expect(storeProduct.index).toBeDefined();
   });

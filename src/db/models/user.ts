@@ -1,5 +1,5 @@
 import pool from "..";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -9,12 +9,12 @@ export type User = {
   password: string;
 };
 
-const { pepper, saltRounds} = process.env
+const { pepper, saltRounds } = process.env;
 
 export class UserStore {
   async create(u: User): Promise<User> {
     const hash = bcrypt.hashSync(
-      u.password + pepper, 
+      u.password + pepper,
       parseInt(saltRounds as string)
     );
     const conn = await pool.connect();

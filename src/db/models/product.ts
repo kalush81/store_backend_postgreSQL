@@ -13,7 +13,7 @@ export class ProductStore {
   async index(): Promise<Product[]> {
     try {
       const conn = await pool.connect();
-      const sql = "SELECT * FROM products";
+      const sql = "SELECT * FROM clothes_schema.products";
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
@@ -25,7 +25,7 @@ export class ProductStore {
   async getOnById(id: string): Promise<Product> {
     try {
       const conn = await pool.connect();
-      const sql = "SELECT * FROM products WHERE id=($1)";
+      const sql = "SELECT * FROM clothes_schema.products WHERE id=($1)";
       const result = await conn.query(sql, [id]);
       return result.rows[0];
     } catch (error) {
@@ -37,7 +37,7 @@ export class ProductStore {
     try {
       const conn = await pool.connect();
       const sql =
-        "INSERT INTO products (name, description, quantity, price, category) VALUES($1, $2, $3, $4, $5) RETURNING *;";
+        "INSERT INTO clothes_schema.products (name, description, quantity, price, category) VALUES($1, $2, $3, $4, $5) RETURNING *;";
       const result = await conn.query(sql, [
         p.name,
         p.description,
@@ -57,7 +57,8 @@ export class ProductStore {
   async delete(id: string): Promise<number> {
     try {
       const conn = await pool.connect();
-      const sql = "DELETE FROM products WHERE id = $1 RETURNING id;";
+      const sql =
+        "DELETE FROM clothes_schema.products WHERE id = $1 RETURNING id;";
       const result = await conn.query(sql, [id]);
       conn.release();
       const deleted_id: number = result.rows[0].id as number;
@@ -70,7 +71,7 @@ export class ProductStore {
   async edit(p: Product): Promise<Product> {
     try {
       const conn = await pool.connect();
-      const sql = `UPDATE products SET "name" = $2, "description" = $3, "quantity" = $4, "price" = $5, "category" = $6 WHERE id=$1 RETURNING *;`;
+      const sql = `UPDATE clothes_schema.products SET "name" = $2, "description" = $3, "quantity" = $4, "price" = $5, "category" = $6 WHERE id=$1 RETURNING *;`;
       const result = await conn.query(sql, [
         p.id,
         p.name,

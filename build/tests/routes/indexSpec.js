@@ -1,8 +1,7 @@
+"use strict";
 // import supertest from "supertest";
 // import { app } from "../..";
-
 // const request = supertest(app);
-
 // describe("let's test urls", () => {
 //   it("should respond with 200", async () => {
 //     request.get("/").expect(200);

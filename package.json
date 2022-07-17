@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "jasmine": "jasmine",
-    "test": "export ENV=test && db-migrate --env test down && npm run build && db-migrate --env test up && npm run jasmine && db-migrate --env test down -c2",
+    "test": "export ENV=test && db-migrate reset --env test && npm run build && db-migrate up --env test && npm run jasmine && db-migrate reset --env test",
     "prettier": "prettier --config .prettierrc.json './**/*.ts' --write",
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "build": "npx tsc",

@@ -1,16 +1,18 @@
 {
   "dev": {
     "driver": "pg",
+    "user": {"ENV": "user"},
+    "password": {"ENV": "password"},
     "host": "localhost",
     "database": {"ENV": "database"},
-    "user": {"ENV": "username"},
-    "password": {"ENV": "password"}
+    "schema": "clothes_schema"
   },
   "test": {
     "driver": "pg",
+    "user": {"ENV": "user_test"},
+    "password": {"ENV": "password_test"},
     "host": "localhost",
     "database": {"ENV": "database_test"},
-    "user": {"ENV": "username"},
-    "password": {"ENV": "password"}
+    "schema": "clothes_schema"
   }
 }
