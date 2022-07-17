@@ -5,12 +5,15 @@ const productStore = new ProductStore();
 export const getAllProducts = async (_req: Request, res: Response) => {
   try {
     const products = await productStore.index();
-    res.send(
-      products.length ? products : { msg: "no products on the stock" }
-    );
+    if (products.length) {
+      res.status(200);
+      return res.send(products);
+    }
+    res.status(204); //OK but no content
+    res.send({ msg: "no products on the stock" });
   } catch (err) {
     res.status(500);
-    res.json(`${(err as Error).message}`); 
+    res.json(`${(err as Error).message}`);
   }
 };
 
@@ -24,7 +27,7 @@ export const getOneProduct = async (req: Request, res: Response) => {
     );
   } catch (err) {
     res.status(500);
-    res.json(`${(err as Error).message}`); 
+    res.json(`${(err as Error).message}`);
   }
 };
 
@@ -34,10 +37,11 @@ export const create = async (req: Request, res: Response) => {
   };
   try {
     const newProduct = await productStore.create(product);
+    res.status(201) //OK created
     res.send({ msg: "this is created product", product: newProduct });
   } catch (err) {
     res.status(500);
-    res.json(`${(err as Error).message}`); 
+    res.json(`${(err as Error).message}`);
   }
 };
 // fix the logic
@@ -51,7 +55,7 @@ export const edit = async (req: Request, res: Response) => {
     res.send({ msg: `this is edited product`, edited });
   } catch (err) {
     res.status(500);
-    res.json(`${(err as Error).message}`); 
+    res.json(`${(err as Error).message}`);
   }
 };
 
@@ -61,6 +65,6 @@ export const remove = async (req: Request, res: Response) => {
     res.send({ msg: "this is id of deleted product", deleted });
   } catch (err) {
     res.status(400);
-    res.json(`${(err as Error).message}`); 
+    res.json(`${(err as Error).message}`);
   }
 };
